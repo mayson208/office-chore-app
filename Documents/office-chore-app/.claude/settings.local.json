@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn spring-boot:run)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :8080)",
+      "Bash(cmd.exe /c \"taskkill /PID 29048 /F\")",
+      "Bash(cmd.exe /c \"taskkill /F /PID 29048\")",
+      "Bash(powershell -Command \"Stop-Process -Id 29048 -Force; Write-Host ''done''\")"
+    ]
+  }
+}

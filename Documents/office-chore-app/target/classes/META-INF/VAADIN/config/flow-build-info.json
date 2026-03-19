@@ -1,0 +1,18 @@
+{
+  "productionMode": false,
+  "eagerServerLoad": false,
+  "npmFolder": "C:\\Users\\Rachel\\Documents\\office-chore-app",
+  "node.version": "v20.18.0",
+  "node.download.root": "https://nodejs.org/dist/",
+  "frontendFolder": "C:\\Users\\Rachel\\Documents\\office-chore-app\\src\\main\\frontend",
+  "connect.javaSourceFolder": "C:\\Users\\Rachel\\Documents\\office-chore-app\\src\\main\\java",
+  "javaResourceFolder": "C:\\Users\\Rachel\\Documents\\office-chore-app\\src\\main\\resources",
+  "connect.applicationProperties": "C:\\Users\\Rachel\\Documents\\office-chore-app\\src\\main\\resources\\application.properties",
+  "connect.openApiFile": "C:\\Users\\Rachel\\Documents\\office-chore-app\\target\\generated-resources\\openapi.json",
+  "project.frontend.generated": "C:\\Users\\Rachel\\Documents\\office-chore-app\\src\\main\\frontend\\generated",
+  "pnpm.enable": false,
+  "bun.enable": false,
+  "require.home.node": false,
+  "build.folder": "target",
+  "react.enable": true
+}

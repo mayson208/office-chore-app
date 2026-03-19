@@ -1,0 +1,24 @@
+/* Office Chore App - Custom Styles */
+
+/* Overdue entries */
+.fc-event[style*="background-color: rgb(244, 67, 54)"] {
+    border-color: #c62828 !important;
+    font-weight: bold;
+}
+
+/* Completed entries */
+.fc-event[style*="background-color: rgb(158, 158, 158)"] {
+    opacity: 0.7;
+}
+
+/* Login page */
+.login-view {
+    background: var(--lumo-contrast-5pct);
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 600px) {
+    vaadin-app-layout::part(drawer) {
+        width: 200px;
+    }
+}
