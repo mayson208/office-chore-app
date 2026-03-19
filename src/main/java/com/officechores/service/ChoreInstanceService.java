@@ -95,4 +95,14 @@ public class ChoreInstanceService {
     public Optional<ChoreInstance> findById(Long id) {
         return choreInstanceRepository.findById(id);
     }
+
+    @Transactional
+    public ChoreInstance createSingleInstance(Chore chore, LocalDate date) {
+        ChoreInstance instance = new ChoreInstance();
+        instance.setChore(chore);
+        instance.setScheduledDate(date);
+        instance.setScheduledTime(chore.getRecurrenceTime());
+        instance.setStatus(ChoreStatus.PENDING);
+        return choreInstanceRepository.save(instance);
+    }
 }

@@ -9,7 +9,7 @@
   "devBundleOutput": "C:/Users/Rachel/Documents/office-chore-app/target/dev-bundle/webapp",
   "devBundleStatsOutput": "C:/Users/Rachel/Documents/office-chore-app/target/dev-bundle/config",
   "jarResourcesFolder": "C:/Users/Rachel/Documents/office-chore-app/src/main/frontend/generated/jar-resources",
-  "themeName": "",
+  "themeName": "office-chores",
   "clientServiceWorkerSource": "C:\\Users\\Rachel\\Documents\\office-chore-app\\target\\sw.ts",
   "pwaEnabled": false,
   "offlineEnabled": false,

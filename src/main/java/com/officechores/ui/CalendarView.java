@@ -10,6 +10,8 @@ import com.officechores.service.UserService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -24,6 +26,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Route(value = "", layout = MainLayout.class)
@@ -66,7 +69,8 @@ public class CalendarView extends VerticalLayout {
     private void buildCalendar() {
         calendar = FullCalendarBuilder.create().build();
         calendar.setSizeFull();
-        calendar.setFirstDay(java.time.DayOfWeek.MONDAY);
+        calendar.setFirstDay(java.time.DayOfWeek.SUNDAY);
+        calendar.setLocale(Locale.ENGLISH);
 
         entryProvider = InMemoryEntryProvider.from();
         calendar.setEntryProvider(entryProvider);
@@ -102,45 +106,69 @@ public class CalendarView extends VerticalLayout {
     }
 
     private HorizontalLayout buildToolbarLayout() {
+        Button prev = new Button("‹ Prev", e -> {
+            calendar.previous();
+            loadCalendarEntries();
+        });
+        prev.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+
         Button today = new Button("Today", e -> {
             calendar.today();
             loadCalendarEntries();
         });
-        Button prev = new Button("‹", e -> {
-            calendar.previous();
-            loadCalendarEntries();
-        });
-        Button next = new Button("›", e -> {
+        today.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SMALL);
+
+        Button next = new Button("Next ›", e -> {
             calendar.next();
             loadCalendarEntries();
         });
+        next.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+
+        HorizontalLayout navGroup = new HorizontalLayout(prev, today, next);
+        navGroup.setSpacing(false);
+        navGroup.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+
+        Span legend = new Span();
+        legend.getStyle()
+                .set("display", "flex").set("gap", "12px").set("align-items", "center")
+                .set("font-size", "0.8em").set("color", "var(--lumo-secondary-text-color)");
+
+        Span pending = new Span("● Pending");
+        pending.getStyle().set("color", "#4caf50");
+        Span overdue = new Span("● Overdue");
+        overdue.getStyle().set("color", "#f44336");
+        Span completed = new Span("● Done");
+        completed.getStyle().set("color", "#9e9e9e");
+        legend.add(pending, overdue, completed);
 
         ComboBox<String> viewSelect = new ComboBox<>();
         viewSelect.setItems("Week", "Month", "Day", "List");
         viewSelect.setValue("Week");
-        viewSelect.setWidth("120px");
+        viewSelect.setWidth("110px");
         viewSelect.addValueChangeListener(e -> {
             if (e.getValue() == null) return;
             switch (e.getValue()) {
                 case "Month" -> calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.DAY_GRID_MONTH);
-                case "Day" -> calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.TIME_GRID_DAY);
-                case "List" -> calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.LIST_WEEK);
-                default -> calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.TIME_GRID_WEEK);
+                case "Day"   -> calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.TIME_GRID_DAY);
+                case "List"  -> calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.LIST_WEEK);
+                default      -> calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.TIME_GRID_WEEK);
             }
             loadCalendarEntries();
         });
 
-        Button refresh = new Button("Refresh", e -> loadCalendarEntries());
-        refresh.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-
-        HorizontalLayout toolbar = new HorizontalLayout(prev, today, next, viewSelect, refresh);
-        toolbar.setDefaultVerticalComponentAlignment(com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER);
+        HorizontalLayout toolbar = new HorizontalLayout(navGroup, legend, viewSelect);
+        toolbar.setWidthFull();
+        toolbar.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         toolbar.setPadding(true);
+        toolbar.setSpacing(true);
+        toolbar.expand(legend);
+        toolbar.getStyle()
+                .set("border-bottom", "1px solid var(--lumo-contrast-10pct)")
+                .set("background", "var(--lumo-base-color)");
         return toolbar;
     }
 
     private void buildToolbar() {
-        // Set initial view to week
         calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.TIME_GRID_WEEK);
     }
 
@@ -173,12 +201,19 @@ public class CalendarView extends VerticalLayout {
         entry.setEditable(instance.getStatus() != ChoreStatus.COMPLETED);
 
         switch (instance.getStatus()) {
-            case OVERDUE -> entry.setColor("#f44336");
+            case OVERDUE -> {
+                entry.setColor("#e53935");
+                entry.setTextColor("#ffffff");
+            }
             case COMPLETED -> {
-                entry.setColor("#9e9e9e");
+                entry.setColor("#bdbdbd");
+                entry.setTextColor("#616161");
                 entry.setEditable(false);
             }
-            default -> entry.setColor("#4caf50");
+            default -> {
+                entry.setColor("#43a047");
+                entry.setTextColor("#ffffff");
+            }
         }
 
         return entry;

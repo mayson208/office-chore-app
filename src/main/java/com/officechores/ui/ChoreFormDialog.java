@@ -7,6 +7,7 @@ import com.officechores.service.ChoreService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.notification.Notification;
@@ -20,6 +21,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -80,10 +82,15 @@ public class ChoreFormDialog extends Dialog {
         timePicker.setWidthFull();
         timePicker.setValue(chore.getRecurrenceTime() != null ? chore.getRecurrenceTime() : LocalTime.of(9, 0));
 
+        DatePicker scheduledDateField = new DatePicker("Scheduled Date");
+        scheduledDateField.setWidthFull();
+        scheduledDateField.setRequired(true);
+        scheduledDateField.setValue(LocalDate.now());
+
         // Show/hide extra fields based on recurrence
-        updateRecurrenceFields(recurrenceSelect.getValue(), dayOfWeekSelect, dayOfMonthField);
+        updateRecurrenceFields(recurrenceSelect.getValue(), dayOfWeekSelect, dayOfMonthField, scheduledDateField);
         recurrenceSelect.addValueChangeListener(e ->
-                updateRecurrenceFields(e.getValue(), dayOfWeekSelect, dayOfMonthField));
+                updateRecurrenceFields(e.getValue(), dayOfWeekSelect, dayOfMonthField, scheduledDateField));
 
         Button saveBtn = new Button("Save", e -> {
             if (nameField.getValue().isBlank()) {
@@ -110,9 +117,17 @@ public class ChoreFormDialog extends Dialog {
                 chore.setRecurrenceDayOfMonth(null);
             }
 
+            if (recurrenceSelect.getValue() == RecurrenceType.NONE && scheduledDateField.getValue() == null) {
+                Notification.show("Please select a scheduled date.", 3000, Notification.Position.TOP_CENTER)
+                        .addThemeVariants(NotificationVariant.LUMO_ERROR);
+                return;
+            }
+
             try {
                 if (isNew) {
-                    choreService.createChore(chore, currentUser);
+                    LocalDate scheduledDate = recurrenceSelect.getValue() == RecurrenceType.NONE
+                            ? scheduledDateField.getValue() : null;
+                    choreService.createChore(chore, currentUser, scheduledDate);
                 } else {
                     choreService.updateChore(chore);
                 }
@@ -135,14 +150,15 @@ public class ChoreFormDialog extends Dialog {
         footer.setJustifyContentMode(com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode.END);
 
         VerticalLayout content = new VerticalLayout(header, nameField, descField, notesField,
-                recurrenceSelect, dayOfWeekSelect, dayOfMonthField, timePicker, footer);
+                recurrenceSelect, scheduledDateField, dayOfWeekSelect, dayOfMonthField, timePicker, footer);
         content.setSpacing(true);
         content.setPadding(false);
 
         add(content);
     }
 
-    private void updateRecurrenceFields(RecurrenceType type, ComboBox<?> dayOfWeek, IntegerField dayOfMonth) {
+    private void updateRecurrenceFields(RecurrenceType type, ComboBox<?> dayOfWeek, IntegerField dayOfMonth, DatePicker scheduledDate) {
+        scheduledDate.setVisible(type == RecurrenceType.NONE);
         dayOfWeek.setVisible(type == RecurrenceType.WEEKLY);
         dayOfMonth.setVisible(type == RecurrenceType.MONTHLY);
     }

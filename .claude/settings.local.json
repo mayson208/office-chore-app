@@ -6,7 +6,18 @@
       "Bash(findstr :8080)",
       "Bash(cmd.exe /c \"taskkill /PID 29048 /F\")",
       "Bash(cmd.exe /c \"taskkill /F /PID 29048\")",
-      "Bash(powershell -Command \"Stop-Process -Id 29048 -Force; Write-Host ''done''\")"
+      "Bash(powershell -Command \"Stop-Process -Id 29048 -Force; Write-Host ''done''\")",
+      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Stop-Process -Id $_-Force -ErrorAction SilentlyContinue }; Write-Host ''done''\")",
+      "Bash(cmd /c \"for /f \"\"tokens=5\"\" %a in \\(''netstat -aon ^| findstr :8080 ^| findstr LISTENING''\\) do taskkill /F /PID %a\")",
+      "Bash(cmd /c \"netstat -aon | findstr :8080\")",
+      "Bash(cmd /c \"tasklist | findstr java\")",
+      "Bash(cmd /c \"netstat -aon | findstr :8080 & tasklist | findstr -i \"\"java javaw\"\"\")",
+      "Bash(cmd /c \"netstat -ano | findstr 8080\")",
+      "Bash(cmd /c \"tasklist | findstr /i node\")",
+      "Bash(mvn spring-boot:run -e)",
+      "Bash(mvn spring-boot:run -Dspring-boot.run.arguments=\"--debug\")",
+      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue | Select-Object LocalPort,State,OwningProcess | Format-Table\")",
+      "Bash(powershell -Command \"Stop-Process -Id 24440 -Force\")"
     ]
   }
 }

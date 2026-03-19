@@ -103,6 +103,7 @@
   "@vaadin/vaadin-usage-statistics": "2.1.3",
   "@vaadin/vertical-layout": "24.5.1",
   "@vaadin/virtual-list": "24.5.1",
+  "construct-style-sheets-polyfill": "3.1.0",
   "date-fns": "2.29.3",
   "is-regexp": "3.1.0",
   "lit-element": "4.1.1",
@@ -236,14 +237,16 @@
   "vaadin-time-picker/timepickerConnector.js": "403b8ccec4da46680f371586ad32b38ea076272e95835af6a0c3ec0378d802c8",
   "virtualListConnector.js": "e89f6bc6f5cd4765c863ae12721371ebff9079d163679e3989368fb7f74e5e61"
  },
- "themeJsonContents": {},
+ "themeJsonContents": {
+  "office-chores": "{\n  \"lumoImports\": [\"color\", \"typography\", \"sizing\", \"spacing\", \"style\"]\n}\n"
+ },
  "entryScripts": [
-  "VAADIN/build/indexhtml-Co3Evg6-.js"
+  "VAADIN/build/indexhtml-DACFEjUW.js"
  ],
  "webComponents": [],
  "cvdlModules": {},
  "packageJsonHash": "2abc4ddf44d27ff8449dd22153258b3c7d4b3e3d3798ce53cda7926d9909871d",
  "indexHtmlGenerated": [
-  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-Co3Evg6-.js\"></script>"
+  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-DACFEjUW.js\"></script>"
  ]
 }

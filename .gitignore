@@ -1,0 +1,28 @@
+# Maven build output
+target/
+
+# Node / npm
+node_modules/
+package-lock.json
+
+# Vaadin generated (regenerated on build)
+src/main/bundles/
+src/main/frontend/generated/
+tsconfig.json
+types.d.ts
+
+# H2 database files
+data/
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Claude local settings
+.claude/
+
+# Vaadin dev server settings (local only)
+target/vaadin-dev-server-settings.json

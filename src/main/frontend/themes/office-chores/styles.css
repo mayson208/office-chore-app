@@ -1,0 +1,107 @@
+/* ============================================================
+   OFFICE CHORES — Near-Black Dark Theme
+   Overrides Lumo dark's navy-blue with true near-black.
+   All CSS custom properties cascade into Vaadin shadow DOMs.
+   ============================================================ */
+
+html[theme~="dark"] {
+
+  /* ── Base background: near-black ─────────────────────────── */
+  --lumo-base-color: #141414;
+
+  /* ── Tints: neutral white overlays on dark background ─────── */
+  --lumo-tint-5pct:  rgba(255, 255, 255, 0.05);
+  --lumo-tint-10pct: rgba(255, 255, 255, 0.10);
+  --lumo-tint-20pct: rgba(255, 255, 255, 0.16);
+  --lumo-tint-30pct: rgba(255, 255, 255, 0.24);
+  --lumo-tint-40pct: rgba(255, 255, 255, 0.32);
+  --lumo-tint-50pct: rgba(255, 255, 255, 0.41);
+  --lumo-tint-60pct: rgba(255, 255, 255, 0.50);
+  --lumo-tint-70pct: rgba(255, 255, 255, 0.60);
+  --lumo-tint-80pct: rgba(255, 255, 255, 0.70);
+  --lumo-tint-90pct: rgba(255, 255, 255, 0.80);
+  --lumo-tint:       #ffffff;
+
+  /* ── Shades ─────────────────────────────────────────────── */
+  --lumo-shade-5pct:  rgba(0, 0, 0, 0.15);
+  --lumo-shade-10pct: rgba(0, 0, 0, 0.25);
+  --lumo-shade-20pct: rgba(0, 0, 0, 0.35);
+  --lumo-shade-30pct: rgba(0, 0, 0, 0.45);
+  --lumo-shade-40pct: rgba(0, 0, 0, 0.55);
+  --lumo-shade-50pct: rgba(0, 0, 0, 0.63);
+  --lumo-shade-60pct: rgba(0, 0, 0, 0.70);
+  --lumo-shade-70pct: rgba(0, 0, 0, 0.78);
+  --lumo-shade-80pct: rgba(0, 0, 0, 0.85);
+  --lumo-shade-90pct: rgba(0, 0, 0, 0.91);
+  --lumo-shade:       #000000;
+
+  /* ── Contrast (borders, dividers) ────────────────────────── */
+  --lumo-contrast-5pct:  rgba(255, 255, 255, 0.05);
+  --lumo-contrast-10pct: rgba(255, 255, 255, 0.10);
+  --lumo-contrast-20pct: rgba(255, 255, 255, 0.16);
+  --lumo-contrast-30pct: rgba(255, 255, 255, 0.24);
+  --lumo-contrast-40pct: rgba(255, 255, 255, 0.32);
+  --lumo-contrast-50pct: rgba(255, 255, 255, 0.41);
+  --lumo-contrast-60pct: rgba(255, 255, 255, 0.50);
+  --lumo-contrast-70pct: rgba(255, 255, 255, 0.60);
+  --lumo-contrast-80pct: rgba(255, 255, 255, 0.70);
+  --lumo-contrast-90pct: rgba(255, 255, 255, 0.80);
+  --lumo-contrast:       #ffffff;
+
+  /* ── Text ─────────────────────────────────────────────────── */
+  --lumo-header-text-color:    rgba(255, 255, 255, 0.93);
+  --lumo-body-text-color:      rgba(255, 255, 255, 0.82);
+  --lumo-secondary-text-color: rgba(255, 255, 255, 0.56);
+  --lumo-tertiary-text-color:  rgba(255, 255, 255, 0.36);
+  --lumo-disabled-text-color:  rgba(255, 255, 255, 0.26);
+
+  /* ── Primary: Google-blue ─────────────────────────────────── */
+  --lumo-primary-color:          #8ab4f8;
+  --lumo-primary-color-50pct:    rgba(138, 180, 248, 0.50);
+  --lumo-primary-color-10pct:    rgba(138, 180, 248, 0.10);
+  --lumo-primary-text-color:     #8ab4f8;
+  --lumo-primary-contrast-color: #0f0f0f;
+
+  /* ── Error ────────────────────────────────────────────────── */
+  --lumo-error-color:          #f28b82;
+  --lumo-error-color-50pct:    rgba(242, 139, 130, 0.50);
+  --lumo-error-color-10pct:    rgba(242, 139, 130, 0.10);
+  --lumo-error-text-color:     #f28b82;
+  --lumo-error-contrast-color: #000000;
+
+  /* ── Success ──────────────────────────────────────────────── */
+  --lumo-success-color:          #81c995;
+  --lumo-success-color-50pct:    rgba(129, 201, 149, 0.50);
+  --lumo-success-color-10pct:    rgba(129, 201, 149, 0.10);
+  --lumo-success-text-color:     #81c995;
+  --lumo-success-contrast-color: #000000;
+
+  /* ── Warning ──────────────────────────────────────────────── */
+  --lumo-warning-color:          #fdd663;
+  --lumo-warning-color-10pct:    rgba(253, 214, 99, 0.10);
+  --lumo-warning-text-color:     #e8a000;
+  --lumo-warning-contrast-color: #000000;
+
+  /* ── Rounder corners for a friendlier feel ────────────────── */
+  --lumo-border-radius-s:  6px;
+  --lumo-border-radius-m: 10px;
+  --lumo-border-radius-l: 16px;
+
+  /* ── Clean sans-serif font ────────────────────────────────── */
+  --lumo-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+
+  /* ── FullCalendar CSS variables (cascade into shadow DOM) ─── */
+  --fc-today-bg-color:         rgba(138, 180, 248, 0.07);
+  --fc-now-indicator-color:    #f28b82;
+  --fc-border-color:           rgba(255, 255, 255, 0.08);
+  --fc-neutral-bg-color:       rgba(255, 255, 255, 0.04);
+  --fc-highlight-color:        rgba(138, 180, 248, 0.14);
+  --fc-bg-event-opacity:       0.25;
+  --fc-list-event-hover-bg-color: rgba(138, 180, 248, 0.10);
+}
+
+/* ── Page background ──────────────────────────────────────────── */
+body {
+  background-color: var(--lumo-base-color);
+}

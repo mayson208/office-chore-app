@@ -7,6 +7,7 @@ import com.officechores.repository.ChoreRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,11 +23,13 @@ public class ChoreService {
     }
 
     @Transactional
-    public Chore createChore(Chore chore, User createdBy) {
+    public Chore createChore(Chore chore, User createdBy, LocalDate scheduledDate) {
         chore.setCreatedBy(createdBy);
         chore = choreRepository.save(chore);
         if (chore.getRecurrenceType() != RecurrenceType.NONE) {
             choreInstanceService.generateUpcomingInstances(chore, 4);
+        } else if (scheduledDate != null) {
+            choreInstanceService.createSingleInstance(chore, scheduledDate);
         }
         return chore;
     }
