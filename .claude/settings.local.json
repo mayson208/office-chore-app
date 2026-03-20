@@ -17,7 +17,19 @@
       "Bash(mvn spring-boot:run -e)",
       "Bash(mvn spring-boot:run -Dspring-boot.run.arguments=\"--debug\")",
       "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue | Select-Object LocalPort,State,OwningProcess | Format-Table\")",
-      "Bash(powershell -Command \"Stop-Process -Id 24440 -Force\")"
+      "Bash(powershell -Command \"Stop-Process -Id 24440 -Force\")",
+      "Bash(git push:*)",
+      "Bash(taskkill /PID 240 /F)",
+      "Bash(cmd /c \"netstat -ano | findstr :8080 | findstr LISTENING\")",
+      "Bash(cmd /c \"for /f \"\"tokens=5\"\" %a in \\(''netstat -ano ^| findstr :8080 ^| findstr LISTENING''\\) do taskkill /F /PID %a\")",
+      "Bash(cmd /c \"netstat -ano | findstr :8080\")",
+      "Bash(mvn clean:*)",
+      "Bash(cmd /c \"wmic process where \"\"name=''java.exe''\"\" get ProcessId,CommandLine 2>&1\")",
+      "Bash(cmd /c \"netstat -ano\")",
+      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue | Select-Object LocalAddress,LocalPort,State,OwningProcess\")",
+      "Bash(powershell -Command \"Get-Process -Id 240 -ErrorAction SilentlyContinue | Select-Object Id,Name,Path\")",
+      "Bash(powershell -Command \"Stop-Process -Id 240 -Force\")",
+      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue\")"
     ]
   }
 }

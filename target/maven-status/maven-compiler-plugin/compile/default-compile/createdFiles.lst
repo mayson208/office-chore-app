@@ -18,6 +18,7 @@ com\officechores\model\RecurrenceType.class
 com\officechores\repository\AssignmentRepository.class
 com\officechores\ui\TeamView.class
 com\officechores\ui\ChoreDetailDialog.class
+com\officechores\AppShell.class
 com\officechores\model\Notification.class
 com\officechores\model\NotificationType.class
 com\officechores\model\Assignment.class
