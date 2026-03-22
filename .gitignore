@@ -1,0 +1,30 @@
+### Maven ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### Node / Vaadin frontend ###
+node_modules/
+node/
+package-lock.json
+src/main/frontend/generated/
+src/main/bundles/
+
+### Database files ###
+data/
+*.mv.db
+*.lock.db
+
+### IDE ###
+.idea/
+*.iml
+.vscode/
+*.class
+.claude/
+
+### Env / Secrets ###
+.env
+application-local.properties
+
+### OS ###
+.DS_Store
+Thumbs.db
